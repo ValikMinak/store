@@ -32,3 +32,40 @@ class UserLoginForm(forms.Form):
             if not user:
                 raise forms.ValidationError('Пользователь неактивен')
         return super().clean(*args, **kwargs)
+
+
+class UserRegistrationForm(forms.ModelForm):
+    username = forms.CharField(label='username',
+                               widget=forms.TextInput(attrs={
+                                   'class': 'form-control',
+                                   'placeholder': "Введите username",
+
+                               }))
+    email = forms.EmailField(label='email',
+                             widget=forms.TextInput(attrs={
+                                 'class': 'form-control',
+                                 'placeholder': "Введите email",
+
+                             }))
+    password = forms.CharField(label='password',
+                               widget=forms.PasswordInput(attrs={
+                                   'class': 'form-control',
+                                   'placeholder': "Введите password",
+
+                               }))
+    password_confirm = forms.CharField(label='repeat',
+                                       widget=forms.PasswordInput(attrs={
+                                           'class': 'form-control',
+                                           'placeholder': "Введите password",
+
+                                       }))
+
+    class Meta:
+        model = User
+        fields = ('username','email')
+
+    def clean_password_confirm(self):
+        data = self.cleaned_data
+        if data['password'] != data['password_confirm']:
+            raise forms.ValidationError('Пароли не совпадаюь')
+        return data['password_confirm']
