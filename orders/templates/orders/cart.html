@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% for product  in items %}
+{{ product.item.title }}
+<div>
+    {{product.quantity}}
+    {{product.get_total}}
+    <button data-product="{{product.item.id}}" data-action="add" style="margin-right: 10px;" class="update-cart">+
+    </button>
+    <button data-product="{{product.item.id}}" data-action="remove" class="update-cart">-</button>
+</div>
+
+
+{% endfor %}
+
+<strong>Всего позиций:</strong> {{order.get_cart_items}}
+<div>
+    <strong>на сумму:</strong> {{order.get_cart_total}}
+</div>
+{% endblock %}

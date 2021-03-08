@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        Home
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    <link rel="stylesheet" href="{% static 'css/promotions.css' %}">
+    <link rel="stylesheet" href="{% static 'css/items.css' %}">
+    <script>
+        let user = '{{ request.user }}'
+
+        function getCookie(name) {
+            let cookieArr = document.cookie.split(';');
+            let cookies = document.cookie.split(';')
+
+            for (i = 0; i < cookies.length; i++) {
+                let cookiePair = cookieArr[i].split('=')
+
+                if (name === cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1])
+                }
+            }
+            return null;
+        }
+
+        let cart = JSON.parse(getCookie('cart'))
+        if (cart === undefined) {
+            cart = {}
+            document.cookie = 'cart=' + JSON.stringify(cart)
+        }
+        var csrftoken = getCookie('csrftoken')
+
+    </script>
+</head>
+<body>
+{% block header %}
+{% include '_header.html' %}
+{% endblock %}
+<div class="content-section">
+    {% block content %}{% endblock %}
+</div>
+
+{%include '_footer.html'%}
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+
+</body>
+</html>
