@@ -120,12 +120,12 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'static/'
 
-# STATICFILES_STORAGE = BASE_DIR / 'static/'
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'promotions/static',
-#     BASE_DIR / 'items/static'
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'promotions/static',
+    BASE_DIR / 'orders/static',
+]
+
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
