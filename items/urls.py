@@ -3,5 +3,6 @@ from .views import *
 
 urlpatterns = [
     path('category/<str:slug>', CategoryItems.as_view(), name='category_items'),
-    path('item/<int:pk>', SingleItem.as_view(), name='single_item')
+    path('item/<int:pk>', SingleItem.as_view(), name='single_item'),
+    path('category_children/<str:slug>', CategoryChildren.as_view(), name='category_children')
 ]

@@ -6,5 +6,28 @@
 {% endblock %}
 
 {% block content %}
-{{item.title}}
+{%include '_breadcrumbs.html'%}
+<section class="product__card">
+    <div class="container">
+        <div class="product__card--inner">
+            <div class="product__card--img-box">
+                <img class="product__card--img" src="{{item.photo.url}}" alt="">
+                <p class="product__card--price">
+                    Цена: {{ item.price}} $
+                </p>
+            </div>
+            <div class="product__card--info">
+                <h1 class="product__card--title">
+                    {{item.title}}
+                </h1>
+                <p class="product__card--description">
+                    <span>описание: </span> <br>
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    {{item.description}}
+                </p>
+                <button data-action="add" data-product="{{item.pk}}" class="product__card--btn update-cart">Купить</button>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

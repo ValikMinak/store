@@ -1,9 +1,9 @@
-from orders.models import Order
+from orders.models import Order, Customer
 
 
 def getCartInfo(user):
     if user.is_authenticated:
-        customer = user.customer
+        customer = Customer.objects.get(user_id=user.id)
         order, created = Order.objects.get_or_create(customer=customer)
         items = order.order_items.all()
         cartItems = order.get_cart_items
@@ -14,5 +14,3 @@ def getCartInfo(user):
         cartItems = order['get_cart_items']
 
     return (items, order, cartItems)
-
-

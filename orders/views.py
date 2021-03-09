@@ -1,11 +1,13 @@
 import json
 
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 
 from helpers.cart import getCartInfo
 from items.models import Item, Category
-from orders.models import Order, OrderItem
+from orders.forms import OrderConfirmForm
+from orders.models import Order, OrderItem, ShippingAddress, Customer
 
 
 def cart(request):
@@ -38,3 +40,25 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+
+def processOrder(request):
+    form = OrderConfirmForm(request.POST or None)
+    items, order, cartItems = getCartInfo(request.user)
+    categories = Category.objects.all()
+    context = {'items': items, 'order': order, cartItems: cartItems, 'form': form, 'categories': categories}
+
+    if request.user.is_authenticated:
+        customer = Customer.objects.get(user_id=request.user.id)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            ShippingAddress.objects.create(
+                customer=customer,
+                order=order,
+                address=cleaned_data['address'],
+                city=cleaned_data['city'],
+            )
+            Order.objects.filter(id=id).delete()
+            return redirect('promotions:home')
+
+    return render(request, 'orders/checkout.html', context)

@@ -6,16 +6,16 @@ User = get_user_model()
 
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(label='username',
+    username = forms.CharField(label='имя',
                                widget=forms.TextInput(attrs={
                                    'class': 'form-control',
-                                   'placeholder': "Введите username",
+                                   'placeholder': "Введите имя",
 
                                }))
-    password = forms.CharField(label='password',
+    password = forms.CharField(label='пароль',
                                widget=forms.PasswordInput(attrs={
                                    'class': 'form-control',
-                                   'placeholder': "Введите password",
+                                   'placeholder': "Введите пароль",
 
                                }))
 
@@ -35,10 +35,10 @@ class UserLoginForm(forms.Form):
 
 
 class UserRegistrationForm(forms.ModelForm):
-    username = forms.CharField(label='username',
+    username = forms.CharField(label='имя',
                                widget=forms.TextInput(attrs={
                                    'class': 'form-control',
-                                   'placeholder': "Введите username",
+                                   'placeholder': "Введите имя",
 
                                }))
     email = forms.EmailField(label='email',
@@ -47,16 +47,16 @@ class UserRegistrationForm(forms.ModelForm):
                                  'placeholder': "Введите email",
 
                              }))
-    password = forms.CharField(label='password',
+    password = forms.CharField(label='пароль',
                                widget=forms.PasswordInput(attrs={
                                    'class': 'form-control',
-                                   'placeholder': "Введите password",
+                                   'placeholder': "Введите пароль",
 
                                }))
-    password_confirm = forms.CharField(label='repeat',
+    password_confirm = forms.CharField(label='пароль-2',
                                        widget=forms.PasswordInput(attrs={
                                            'class': 'form-control',
-                                           'placeholder': "Введите password",
+                                           'placeholder': "Повторите пароль",
 
                                        }))
 
@@ -67,5 +67,5 @@ class UserRegistrationForm(forms.ModelForm):
     def clean_password_confirm(self):
         data = self.cleaned_data
         if data['password'] != data['password_confirm']:
-            raise forms.ValidationError('Пароли не совпадаюь')
+            raise forms.ValidationError('Пароли не совпадают')
         return data['password_confirm']

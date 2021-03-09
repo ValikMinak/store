@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+
+{% block title %}
+asdasdasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaa
+{% endblock %}
+
+{% block content %}
+{% for category in category_children%}
+{% if category.items.all%}
+
+<div class="product__item--wrapper">
+    <a href="{% url 'items:category_items' category.slug%}" class="product__item">
+        <p class="product__item--hover-text">посмотреть категорию</p>
+        <h4 class="product__item--title">
+            {{category.title}}
+        </h4>
+    </a>
+</div>
+{%endif%}
+{% endfor %}
+{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+Оформление заказа
+{% endblock %}
+
+{% block content %}
+    <div class="back__cart">
+        <a href="{% url 'cart'%}">Назад в корзину</a>
+    </div>
+<h3>Оформление заказа</h3>
+{% url 'orders:process_order' as action%}
+
+{% include '_form.html' with button='Заказать'%}
+
+{% endblock %}

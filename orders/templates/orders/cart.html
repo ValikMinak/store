@@ -2,21 +2,63 @@
 
 
 {% block content %}
-{% for product  in items %}
-{{ product.item.title }}
-<div>
-    {{product.quantity}}
-    {{product.get_total}}
-    <button data-product="{{product.item.id}}" data-action="add" style="margin-right: 10px;" class="update-cart">+
-    </button>
-    <button data-product="{{product.item.id}}" data-action="remove" class="update-cart">-</button>
+
+<div class="cart">
+    <h3 class="cart__title">
+        Корзина
+    </h3>
+
+    {% if items%}
+    <div class="cart__inner">
+        <table class="cart__inner-table">
+            <tr class="cart__inner-title">
+                <td><p>Название</p></td>
+                <td><p>Фото</p></td>
+                <td><p>Кол-во</p></td>
+                <td><p>Цена eд.</p></td>
+                <td><p>Цена общая</p></td>
+            </tr>
+            {% for product in items %}
+            <tr class="cart__inner-item">
+                <td><p class="cart__inner-item-title">{{product.item.title}}</p></td>
+                <td><img class="cart__inner-item-img" src="{{product.item.photo.url}}" alt=""></td>
+                <td>
+                    <div class="cart__item-count">
+                        <button data-product="{{product.item.id}}" data-action="add" style="margin-right: 10px;"
+                                class="update-cart">＋
+                        </button>
+                        {{product.quantity}}
+                        <button data-product="{{product.item.id}}" data-action="remove" class="update-cart">‒</button>
+                    </div>
+                </td>
+                <td><span class="cart__item-price">{{product.item.price}}</span></td>
+                <td><span class="cart__item-price-sec">{{product.get_total}}</span></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+    <div class="cart__footer">
+        <div class="cart__footer--info">
+            <span><strong>Всего позиций:</strong></span>
+            <p> {{order.get_cart_items}}</p>
+        </div>
+        <div class="cart__footer--info">
+            <span> <strong>На сумму:</strong></span>
+            <p> {{order.get_cart_total}}</p>
+        </div>
+        <a href="{% url 'orders:process_order'%}" class="cart__btn">
+            Заказать
+        </a>
+    </div>
+    {%else%}
+    Корзина пуста
+    {% endif %}
+
 </div>
 
 
-{% endfor %}
-
-<strong>Всего позиций:</strong> {{order.get_cart_items}}
-<div>
-    <strong>на сумму:</strong> {{order.get_cart_total}}
-</div>
 {% endblock %}
+
+

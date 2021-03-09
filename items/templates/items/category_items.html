@@ -9,25 +9,24 @@
 {%include '_breadcrumbs.html'%}
 <section class="catalog">
     <div class="container">
-        <h2 class="catalog__title">Title</h2>
-        <div class="catalog__items">
-            <div class="products">
-                {% for item in items%}
-                <div class="product__item--wrapper">
-                    <a href="" class="product__item">
-                        <img src="{{item.photo.url}}" class="product__item--img" alt="product_image">
-                        <h4 class="product__item--title">
-                            {{item.title}}
-                        </h4>
-                        <p class="price product__item--price">
-                            {{item.price}}
-                        </p>
-                        <button class="product__item--cart">
-                            <?xml version="1.0" encoding="iso-8859-1"?>
-                            <svg version="1.1" id="Capa_1" width="35px" height="35px" xmlns="http://www.w3.org/2000/svg"
-                                 x="0px" y="0px"
-                                 viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;"
-                                 xml:space="preserve">
+        <div class="catalog__filter">
+            <h2 class="catalog__title">Title</h2>
+            <div>
+                <select name="" id="">
+                    <option value="">2</option>
+                    <option value="">2</option>
+                </select>
+            </div>
+        </div>
+        <div class="catalog__inner--list">
+            {% for item in items%}
+            <div class="product__item--wrapper">
+                <button data-action="add" data-product="{{item.pk}}" class="product__item--cart update-cart">
+                    <?xml version="1.0" encoding="iso-8859-1"?>
+                    <svg version="1.1" id="Capa_1" width="35px" height="35px" xmlns="http://www.w3.org/2000/svg"
+                         x="0px" y="0px"
+                         viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;"
+                         xml:space="preserve">
 		<path d="M143.022,347.67h16.287h277.692c6.71,0,12.622-4.408,14.538-10.839l59.829-200.888c1.367-4.59,0.485-9.556-2.377-13.396
 			c-2.863-3.84-7.371-6.102-12.16-6.102H110.789l-20.412-68.54c-1.915-6.43-7.828-10.838-14.538-10.838H15.169
 			C6.792,37.066,0,43.857,0,52.235c0,8.377,6.792,15.169,15.169,15.169H64.53l20.315,68.211c0.062,0.225,0.127,0.448,0.199,0.668
@@ -44,15 +43,39 @@
 			c13.197,0,23.933,10.736,23.933,23.933s-10.736,23.933-23.933,23.933s-23.933-10.736-23.933-23.933
 			S196.981,396.729,210.178,396.729z" fill="#ffffff"/>
 </svg>
-                        </button>
-
-                    </a>
-                </div>
-                {% endfor %}
-
+                </button>
+                <a href="{% url 'items:single_item' item.pk%}" class="product__item">
+                    <p class="product__item--hover-text">посмотреть товар</p>
+                    <div class="product__item--image">
+                        <img src="{{item.photo.url}}" class="product__item--img" alt="product_image">
+                    </div>
+                    <h4 class="product__item--title">
+                        {{item.title}}
+                    </h4>
+                    <p class="price product__item--price">
+                        {{item.price}}
+                    </p>
+                </a>
             </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            <ul class="pagination__list">
+                <li class="pagination__list--item active">
+                    <a href="#">1</a>
+                </li>
+                <li class="pagination__list--item">
+                    <a href="#">2</a>
+                </li>
+                <li class="pagination__list--item">
+                    <a href="#">3</a>
+                </li>
+            </ul>
+
         </div>
     </div>
 
 </section>
 {% endblock %}
+
+
