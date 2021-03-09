@@ -24,7 +24,7 @@ SECRET_KEY = '1s6uo24$f!a)r$=#o0n7d=59&o*^+5jfsg%qj0$ow4n0(st*$w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['store-car.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
