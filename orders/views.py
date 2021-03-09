@@ -27,7 +27,7 @@ def updateItem(request):
     item = Item.objects.get(pk=itemId)
     order, created = Order.objects.get_or_create(customer=customer)
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order, item=item)
+    orderItem, created = OrderItem.objects.get_or_create(order=order, item=item, ordered=False)
 
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
@@ -46,7 +46,7 @@ def processOrder(request):
     form = OrderConfirmForm(request.POST or None)
     items, order, cartItems = getCartInfo(request.user)
     categories = Category.objects.all()
-    context = {'items': items, 'order': order, cartItems: cartItems, 'form': form, 'categories': categories}
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'form': form, 'categories': categories}
 
     if request.user.is_authenticated:
         customer = Customer.objects.get(user_id=request.user.id)
@@ -58,7 +58,8 @@ def processOrder(request):
                 address=cleaned_data['address'],
                 city=cleaned_data['city'],
             )
-            Order.objects.filter(id=id).delete()
+            order.order_items.update(ordered=True)
+
             return redirect('promotions:home')
 
     return render(request, 'orders/checkout.html', context)

@@ -14,6 +14,7 @@ from orders.models import Order
 
 
 class CategoryItems(LoginRequiredMixin, ListView):
+    model = Item
     template_name = 'items/category_items.html'
     context_object_name = 'items'
     paginate_by = 3

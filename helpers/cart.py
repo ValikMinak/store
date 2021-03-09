@@ -5,7 +5,7 @@ def getCartInfo(user):
     if user.is_authenticated:
         customer = Customer.objects.get(user_id=user.id)
         order, created = Order.objects.get_or_create(customer=customer)
-        items = order.order_items.all()
+        items = order.order_items.filter(ordered=False).all()
         cartItems = order.get_cart_items
 
     else:
