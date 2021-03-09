@@ -32,7 +32,7 @@ class Order(models.Model):
 
     @property
     def get_cart_total(self):
-        orderitems = self.order_items.all()
+        orderitems = self.order_items.filter(ordered=False).all()
         total = sum([item.get_total for item in orderitems])
         return total
 

@@ -47,6 +47,7 @@ body {
 
 .menu__list > li, .menu__list > a {
     display: inline-block;
+    z-index: 999;
 }
 
 .menu__list li {
@@ -166,6 +167,7 @@ body {
 
 .banner__section--slider {
     max-width: 870px;
+    z-index: 9;
 }
 
 .banner__section--slider-btn {

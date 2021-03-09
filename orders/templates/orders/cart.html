@@ -31,8 +31,8 @@
                         <button data-product="{{product.item.id}}" data-action="remove" class="update-cart">‒</button>
                     </div>
                 </td>
-                <td><span class="cart__item-price">{{product.item.price}}</span></td>
-                <td><span class="cart__item-price-sec">{{product.get_total}}</span></td>
+                <td><span class="cart__item-price">{{product.item.price}} $</span></td>
+                <td><span class="cart__item-price-sec">{{product.get_total}} $</span></td>
             </tr>
             {% endfor %}
 
@@ -42,11 +42,11 @@
     <div class="cart__footer">
         <div class="cart__footer--info">
             <span><strong>Всего позиций:</strong></span>
-            <p> {{order.get_cart_items}}</p>
+            <p> {{order.get_cart_items}} шт</p>
         </div>
         <div class="cart__footer--info">
             <span> <strong>На сумму:</strong></span>
-            <p> {{order.get_cart_total}}</p>
+            <p> {{order.get_cart_total}} $</p>
         </div>
         <a href="{% url 'orders:process_order'%}" class="cart__btn">
             Заказать

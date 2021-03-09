@@ -47,7 +47,6 @@ def processOrder(request):
     items, order, cartItems = getCartInfo(request.user)
     categories = Category.objects.all()
     context = {'items': items, 'order': order, 'cartItems': cartItems, 'form': form, 'categories': categories}
-
     if request.user.is_authenticated:
         customer = Customer.objects.get(user_id=request.user.id)
         if form.is_valid():
